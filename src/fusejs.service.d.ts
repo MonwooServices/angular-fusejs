@@ -6,6 +6,7 @@ export interface AngularFusejsOptions<T> extends FuseOptions<T> {
     fusejsScoreKey?: string;
     minSearchTermLength?: number;
     maximumScore?: number;
+    highlightTag?: string;
 }
 export declare class FusejsService<T> {
     private defaultOptions;

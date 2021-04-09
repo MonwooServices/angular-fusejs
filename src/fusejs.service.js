@@ -74,25 +74,28 @@ var FusejsService = /** @class */ (function () {
             });
         }
         return result.map(function (matchObject) {
+            var _a, _b;
             var item = _this.deepClone(matchObject.item);
             item[options.fusejsHighlightKey] = _this.deepClone(item);
             item[options.fusejsScoreKey] = matchObject.score;
-            for (var _i = 0, _a = matchObject.matches; _i < _a.length; _i++) {
-                var match = _a[_i];
+            for (var _i = 0, _c = matchObject.matches; _i < _c.length; _i++) {
+                var match = _c[_i];
                 var indices = match.indices;
                 var highlightOffset = 0;
                 var key = match.key;
                 if (_get(item[options.fusejsHighlightKey], key).constructor === Array) {
                     key += "[" + match.arrayIndex + "]";
                 }
-                for (var _b = 0, indices_1 = indices; _b < indices_1.length; _b++) {
-                    var indice = indices_1[_b];
+                for (var _d = 0, indices_1 = indices; _d < indices_1.length; _d++) {
+                    var indice = indices_1[_d];
                     var initialValue = _get(item[options.fusejsHighlightKey], key);
                     var startOffset = indice[0] + highlightOffset;
                     var endOffset = indice[1] + highlightOffset + 1;
+                    var tagStart = "<" + ((_a = options.highlightTag) !== null && _a !== void 0 ? _a : "em") + ">";
+                    var tagEnd = "</" + ((_b = options.highlightTag) !== null && _b !== void 0 ? _b : "em") + ">";
                     var highlightedTerm = initialValue.substring(startOffset, endOffset);
-                    var newValue = initialValue.substring(0, startOffset) + '<em>' + highlightedTerm + '</em>' + initialValue.substring(endOffset);
-                    highlightOffset += '<em></em>'.length;
+                    var newValue = initialValue.substring(0, startOffset) + tagStart + highlightedTerm + tagEnd + initialValue.substring(endOffset);
+                    highlightOffset += (tagStart + tagEnd).length;
                     _set(item[options.fusejsHighlightKey], key, newValue);
                 }
             }
