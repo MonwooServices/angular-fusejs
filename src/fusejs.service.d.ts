@@ -13,4 +13,3 @@ export declare class FusejsService<T> {
     private deepClone;
     private handleHighlight;
 }
-//# sourceMappingURL=fusejs.service.d.ts.map

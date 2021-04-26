@@ -5,4 +5,3 @@ export declare class FusejsPipe<T> implements PipeTransform {
     constructor(FusejsService: FusejsService<T>);
     transform(elements: Array<T>, searchTerms: string, options?: AngularFusejsOptions<T>): any;
 }
-//# sourceMappingURL=fusejs.pipe.d.ts.map

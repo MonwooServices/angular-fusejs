@@ -1,34 +1,20 @@
 {
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "angular-fusejs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Angular plugin using fuse.js to search through a list of elements with a string. Supports highlight.",
-  "main": "index.js",
+  "main": "bundles/angular-fusejs.umd.js",
   "type": "module",
   "dependencies": {
-    "@angular/common": "10.2.0",
     "@angular/core": "10.2.0",
     "fuse.js": "^3.6.1",
-    "lodash.get": "^4.4.2",
-    "lodash.set": "^4.3.2",
+    "lodash-es": "^4.17.21",
     "rxjs": "^6.6.7",
     "tslib": "^2.1.0",
     "zone.js": "~0.10.3"
   },
-  "devDependencies": {
-    "@types/lodash.get": "^4.4.2",
-    "@types/lodash.set": "^4.3.2",
-    "@types/node": "^13.1.8",
-    "typescript": "3.9.7"
-  },
   "peerDependencies": {
-    "@angular/common": "10.2.0",
     "@angular/core": "10.2.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./dist",
-    "copy-files": "cp README.md LICENSE package.json tsconfig.json dist/",
-    "build": "tsc -p . && yarn copy-files"
   },
   "repository": {
     "type": "git",
@@ -44,5 +30,12 @@
   "bugs": {
     "url": "https://github.com/maleblond/angular-local-search/issues"
   },
-  "homepage": "https://github.com/maleblond/angular-local-search#readme"
+  "homepage": "https://github.com/maleblond/angular-local-search#readme",
+  "module": "fesm2015/angular-fusejs.js",
+  "es2015": "fesm2015/angular-fusejs.js",
+  "esm2015": "esm2015/angular-fusejs.js",
+  "fesm2015": "fesm2015/angular-fusejs.js",
+  "typings": "angular-fusejs.d.ts",
+  "metadata": "angular-fusejs.metadata.json",
+  "sideEffects": false
 }
