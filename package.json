@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "angular-fusejs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Angular plugin using fuse.js to search through a list of elements with a string. Supports highlight.",
   "main": "bundles/angular-fusejs.umd.js",
   "type": "module",
