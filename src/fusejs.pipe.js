@@ -10,20 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FusejsPipe = void 0;
-var core_1 = require("@angular/core");
-var fusejs_service_1 = require("./fusejs.service");
-var FusejsPipe = /** @class */ (function () {
-    function FusejsPipe(FusejsService) {
+const core_1 = require("@angular/core");
+const fusejs_service_1 = require("./fusejs.service");
+let FusejsPipe = class FusejsPipe {
+    constructor(FusejsService) {
         this.FusejsService = FusejsService;
     }
-    FusejsPipe.prototype.transform = function (elements, searchTerms, options) {
-        if (options === void 0) { options = {}; }
+    transform(elements, searchTerms, options = {}) {
         return this.FusejsService.searchList(elements, searchTerms, options);
-    };
-    FusejsPipe = __decorate([
-        core_1.Pipe({ name: 'fusejs' }),
-        __metadata("design:paramtypes", [fusejs_service_1.FusejsService])
-    ], FusejsPipe);
-    return FusejsPipe;
-}());
+    }
+};
+FusejsPipe = __decorate([
+    core_1.Pipe({ name: 'fusejs' }),
+    __metadata("design:paramtypes", [fusejs_service_1.FusejsService])
+], FusejsPipe);
 exports.FusejsPipe = FusejsPipe;

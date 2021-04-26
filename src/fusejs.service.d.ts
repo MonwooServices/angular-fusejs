@@ -9,7 +9,8 @@ export interface AngularFusejsOptions<T> extends FuseOptions<T> {
 }
 export declare class FusejsService<T> {
     private defaultOptions;
-    searchList(list: Array<T>, searchTerms: string, options?: AngularFusejsOptions<T>): any[];
+    searchList(list: Array<T>, searchTerms: string, options?: AngularFusejsOptions<T>): any;
     private deepClone;
     private handleHighlight;
 }
+//# sourceMappingURL=fusejs.service.d.ts.map

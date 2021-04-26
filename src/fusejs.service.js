@@ -10,12 +10,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FusejsService = void 0;
-var core_1 = require("@angular/core");
-var fuse_js_1 = __importDefault(require("fuse.js"));
-var _set = require("lodash.set");
-var _get = require("lodash.get");
-var FusejsService = /** @class */ (function () {
-    function FusejsService() {
+const core_1 = require("@angular/core");
+const fuse_js_1 = __importDefault(require("fuse.js"));
+const _set = require("lodash.set");
+const _get = require("lodash.get");
+let FusejsService = class FusejsService {
+    constructor() {
         this.defaultOptions = {
             supportHighlight: true,
             shouldSort: false,
@@ -30,18 +30,16 @@ var FusejsService = /** @class */ (function () {
             fusejsScoreKey: 'fuseJsScore',
         };
     }
-    FusejsService.prototype.searchList = function (list, searchTerms, options) {
-        var _this = this;
-        if (options === void 0) { options = {}; }
+    searchList(list, searchTerms, options = {}) {
         // https://stackoverflow.com/questions/35959372/property-assign-does-not-exist-on-type-objectconstructor
         // TODO : remove (<any>Object) hack by using right lib or polyfill ?
-        var fuseOptions = Object.assign({}, this.defaultOptions, options);
-        var result = [];
-        if (searchTerms && searchTerms.length >= fuseOptions.minSearchTermLength) {
+        const fuseOptions = Object.assign({}, this.defaultOptions, options);
+        let result = [];
+        if (searchTerms && searchTerms.length >= ((fuseOptions === null || fuseOptions === void 0 ? void 0 : fuseOptions.minSearchTermLength) || 0)) {
             if (fuseOptions.supportHighlight) {
                 fuseOptions.includeMatches = true;
             }
-            var fuse = new fuse_js_1.default(list, fuseOptions);
+            let fuse = new fuse_js_1.default(list, fuseOptions);
             result = fuse.search(searchTerms);
             if (fuseOptions.supportHighlight) {
                 result = this.handleHighlight(result, fuseOptions);
@@ -50,14 +48,14 @@ var FusejsService = /** @class */ (function () {
         else {
             result = this.deepClone(list);
             if (fuseOptions.supportHighlight) {
-                result.forEach(function (element) {
-                    element[fuseOptions.fusejsHighlightKey] = _this.deepClone(element);
+                result.forEach((element) => {
+                    element[fuseOptions.fusejsHighlightKey || '_'] = this.deepClone(element);
                 });
             }
         }
         return result;
-    };
-    FusejsService.prototype.deepClone = function (o) {
+    }
+    deepClone(o) {
         var _out, v, _key;
         _out = Array.isArray(o) ? [] : {};
         for (_key in o) {
@@ -65,46 +63,42 @@ var FusejsService = /** @class */ (function () {
             _out[_key] = (typeof v === "object") ? this.deepClone(v) : v;
         }
         return _out;
-    };
-    FusejsService.prototype.handleHighlight = function (result, options) {
-        var _this = this;
+    }
+    handleHighlight(result, options) {
         if (options.maximumScore && options.includeScore) {
-            result = result.filter(function (matchObject) {
-                return matchObject.score <= options.maximumScore;
+            result = result.filter((matchObject) => {
+                return matchObject.score <= (options.maximumScore || 0);
             });
         }
-        return result.map(function (matchObject) {
+        return result.map((matchObject) => {
             var _a, _b;
-            var item = _this.deepClone(matchObject.item);
-            item[options.fusejsHighlightKey] = _this.deepClone(item);
-            item[options.fusejsScoreKey] = matchObject.score;
-            for (var _i = 0, _c = matchObject.matches; _i < _c.length; _i++) {
-                var match = _c[_i];
-                var indices = match.indices;
-                var highlightOffset = 0;
-                var key = match.key;
-                if (_get(item[options.fusejsHighlightKey], key).constructor === Array) {
-                    key += "[" + match.arrayIndex + "]";
+            const item = this.deepClone(matchObject.item);
+            item[options.fusejsHighlightKey || "_"] = this.deepClone(item);
+            item[options.fusejsScoreKey || "_"] = matchObject.score;
+            for (let match of matchObject.matches) {
+                const indices = match.indices;
+                let highlightOffset = 0;
+                let key = match.key;
+                if (_get(item[options.fusejsHighlightKey || "_"], key).constructor === Array) {
+                    key += `[${match.arrayIndex}]`;
                 }
-                for (var _d = 0, indices_1 = indices; _d < indices_1.length; _d++) {
-                    var indice = indices_1[_d];
-                    var initialValue = _get(item[options.fusejsHighlightKey], key);
-                    var startOffset = indice[0] + highlightOffset;
-                    var endOffset = indice[1] + highlightOffset + 1;
-                    var tagStart = "<" + ((_a = options.highlightTag) !== null && _a !== void 0 ? _a : "em") + ">";
-                    var tagEnd = "</" + ((_b = options.highlightTag) !== null && _b !== void 0 ? _b : "em") + ">";
-                    var highlightedTerm = initialValue.substring(startOffset, endOffset);
-                    var newValue = initialValue.substring(0, startOffset) + tagStart + highlightedTerm + tagEnd + initialValue.substring(endOffset);
+                for (let indice of indices) {
+                    let initialValue = _get(item[options.fusejsHighlightKey || "_"], key);
+                    const startOffset = indice[0] + highlightOffset;
+                    const endOffset = indice[1] + highlightOffset + 1;
+                    const tagStart = "<" + ((_a = options.highlightTag) !== null && _a !== void 0 ? _a : "em") + ">";
+                    const tagEnd = "</" + ((_b = options.highlightTag) !== null && _b !== void 0 ? _b : "em") + ">";
+                    let highlightedTerm = initialValue.substring(startOffset, endOffset);
+                    let newValue = initialValue.substring(0, startOffset) + tagStart + highlightedTerm + tagEnd + initialValue.substring(endOffset);
                     highlightOffset += (tagStart + tagEnd).length;
-                    _set(item[options.fusejsHighlightKey], key, newValue);
+                    _set(item[options.fusejsHighlightKey || "_"], key, newValue);
                 }
             }
             return item;
         });
-    };
-    FusejsService = __decorate([
-        core_1.Injectable()
-    ], FusejsService);
-    return FusejsService;
-}());
+    }
+};
+FusejsService = __decorate([
+    core_1.Injectable()
+], FusejsService);
 exports.FusejsService = FusejsService;
