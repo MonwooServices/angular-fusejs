@@ -1,5 +1,4 @@
-import Fuse from 'fuse.js';
-import FuseOptions = Fuse.FuseOptions;
+import { FuseOptions } from 'fuse.js';
 export interface AngularFusejsOptions<T> extends FuseOptions<T> {
     supportHighlight?: boolean;
     fusejsHighlightKey?: string;
