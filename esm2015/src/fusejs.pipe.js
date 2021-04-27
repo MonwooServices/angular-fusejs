@@ -1,0 +1,17 @@
+import { Pipe } from '@angular/core';
+import { FusejsService } from './fusejs.service';
+export class FusejsPipe {
+    constructor(FusejsService) {
+        this.FusejsService = FusejsService;
+    }
+    transform(elements, searchTerms, options = {}) {
+        return this.FusejsService.searchList(elements, searchTerms, options);
+    }
+}
+FusejsPipe.decorators = [
+    { type: Pipe, args: [{ name: 'fusejs' },] }
+];
+FusejsPipe.ctorParameters = () => [
+    { type: FusejsService }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnVzZWpzLnBpcGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvZnVzZWpzLnBpcGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLElBQUksRUFBaUIsTUFBTSxlQUFlLENBQUM7QUFDcEQsT0FBTyxFQUFDLGFBQWEsRUFBdUIsTUFBTSxrQkFBa0IsQ0FBQztBQUlyRSxNQUFNLE9BQU8sVUFBVTtJQUNyQixZQUNVLGFBQStCO1FBQS9CLGtCQUFhLEdBQWIsYUFBYSxDQUFrQjtJQUN0QyxDQUFDO0lBRUosU0FBUyxDQUFDLFFBQWtCLEVBQ2xCLFdBQW1CLEVBQ25CLFVBQW1DLEVBQUU7UUFDN0MsT0FBTyxJQUFJLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxRQUFRLEVBQUUsV0FBVyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQ3ZFLENBQUM7OztZQVZGLElBQUksU0FBQyxFQUFDLElBQUksRUFBRSxRQUFRLEVBQUM7OztZQUhkLGFBQWEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBQaXBlLCBQaXBlVHJhbnNmb3JtIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQge0Z1c2Vqc1NlcnZpY2UsIEFuZ3VsYXJGdXNlanNPcHRpb25zfSBmcm9tICcuL2Z1c2Vqcy5zZXJ2aWNlJztcblxuXG5AUGlwZSh7bmFtZTogJ2Z1c2Vqcyd9KVxuZXhwb3J0IGNsYXNzIEZ1c2Vqc1BpcGU8VD4gaW1wbGVtZW50cyBQaXBlVHJhbnNmb3JtIHtcbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSBGdXNlanNTZXJ2aWNlOiBGdXNlanNTZXJ2aWNlPFQ+XG4gICkge31cblxuICB0cmFuc2Zvcm0oZWxlbWVudHM6IEFycmF5PFQ+LFxuICAgICAgICAgICAgc2VhcmNoVGVybXM6IHN0cmluZyxcbiAgICAgICAgICAgIG9wdGlvbnM6IEFuZ3VsYXJGdXNlanNPcHRpb25zPFQ+ID0ge30pIHtcbiAgICByZXR1cm4gdGhpcy5GdXNlanNTZXJ2aWNlLnNlYXJjaExpc3QoZWxlbWVudHMsIHNlYXJjaFRlcm1zLCBvcHRpb25zKTtcbiAgfVxufVxuIl19
